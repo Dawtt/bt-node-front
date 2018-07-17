@@ -114,12 +114,12 @@ class App extends Component {
                 <Header
                     username={this.state.currentuser.name}
                 />
-                    <Button
-                        onClick={() =>
-                        this.getNowPlaying() &&
-                        this.storeUserNameAndId()
-                        }>
-                    </Button>
+                <Button
+                    onClick={() =>
+                    this.getNowPlaying() &&
+                    this.storeUserNameAndId()
+                    }>
+                </Button>
                 <div
                     className='App' >
                     <a href={backend_node_login_uri}>
@@ -139,9 +139,9 @@ class App extends Component {
                         <div>
                             <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
                         </div>
-                        <p>Now Playing: { this.state.nowPlaying.name }</p>
-                        <p>Current User: { this.state.currentuser.name}</p>
-                        <p>User ID: { this.state.currentuser.id}</p>
+                        <div>Now Playing: { this.state.nowPlaying.name }</div>
+                        <div>Current User: { this.state.currentuser.name}</div>
+                        <div>User ID: { this.state.currentuser.id}</div>
 
                     </Typography>
                 </Button>}

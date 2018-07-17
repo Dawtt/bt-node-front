@@ -31,7 +31,12 @@ class MenuButton extends React.Component {
         const open = Boolean(anchorEl);
         const Wrapper = this.props.iconType;
         const listItems = this.props.items.map((link) =>
-            <MenuItem onClick={this.handleClose} >{link}</MenuItem>
+            <MenuItem
+                key={this.props.items.id}
+                onClick={this.handleClose}
+                >
+                {link}
+            </MenuItem>
         );
 
         return (
@@ -40,7 +45,7 @@ class MenuButton extends React.Component {
                     aria-owns={open ? 'menu-appbar' : null}
                     aria-haspopup="true"
                     onClick={this.handleMenu}
-                    color="contrast"
+                    color="default"
                 >
                     {<Wrapper />}
                 </IconButton>
