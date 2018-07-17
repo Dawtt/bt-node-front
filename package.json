@@ -1,22 +1,41 @@
 {
-  "name": "componentsearchherokubuild",
-  "version": "0.0.1",
+  "name": "bt-node-front",
+  "version": "0.5.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "1.1.4",
+    "@material-ui/core": "^1.1.0",
+    "@material-ui/icons": "^1.1.0",
+    "spotify-web-api-js": "^0.24.0",
+    "react-google-login": "^3.2.1",
+    "typeface-roboto": "^0.0.54",
+    "concurrently":"3.6.0",
+    "serve": "^9.2.0"
+  },
+  "scripts": {
+    "yarn": "yarn",
+    "start": "react-scripts start",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "build": "react-scripts build",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public",
+    "build:dv": "cp .env.development .env && npm run build",
+    "build:rc": "cp ./.env.production .env && npm run build"
+  },
+  "devDependencies": {
+    "@storybook/react": "^3.4.8",
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-links": "^3.4.8",
+    "@storybook/addons": "^3.4.8",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0"
+  },
   "engines": {
     "node": "8.9.3",
     "npm": "6.1.0",
     "yarn": "1.7.0"
-  },
-  "cacheDirectories": [
-    "client/node_modules",
-    "auth_server/node_modules"],
-  "dependencies": {
-    "react-scripts": "1.1.4",
-    "concurrently":"3.6.0"
-  },
-  "scripts": {
-    "installrootdep": "yarn install",
-    "installserverdep": "cd auth-server && yarn install",
-    "installclientdep": "cd client && yarn install",
-    "start": "concurrently \"cd client && yarn start\" \"cd auth-server && node authorization_code/spotifyapp.js\""
   }
 }

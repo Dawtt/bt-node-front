@@ -120,3 +120,4 @@ auth-server/authorization_code/secretsconfig.js
 client/src/secretsconfigclient.js
 auth-server/build/authorization_code/secretsconfig.js
 auth-server/build/build/authorization_code/secretsconfig.js
+src/secretsconfigclient.js

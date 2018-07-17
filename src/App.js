@@ -8,13 +8,23 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import 'typeface-roboto';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+/*
 import secrets from './secretsconfigclient';
+*/
 
 //import logo from './logo.svg';
 //import Papp from './Components/PApp.js';
 //import GoogleLogin from 'react-google-login';
 //import spotifyMethods from './spotifyMethods';
 
+
+/*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').load();
+    console.log("dotenv is being required.")
+}*/
+
+const backend_node_login_uri = process.env.REACT_APP_BACKEND_NODE_LOGIN_URI;
 
 
 
@@ -112,10 +122,12 @@ class App extends Component {
                     </Button>
                 <div
                     className='App' >
-                    <a href={secrets.sp_production_backend_uri}> Login to Spotify </a>
+                    <a href={process.env.REACT_APP_BACKEND_NODE_LOGIN_URI}>
+                        Login to Spotify </a>
                 </div>
                 <div className ='App' >
-                    <a href={secrets.sp_production_backend_logout}> Logout
+                    <a href={process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI}>
+                        Logout
                     </a>
                 </div>
                 { this.state.loggedIn &&
