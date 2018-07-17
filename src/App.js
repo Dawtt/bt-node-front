@@ -25,7 +25,7 @@ if (process.env.NODE_ENV !== 'production') {
 }*/
 
 const backend_node_login_uri = process.env.REACT_APP_BACKEND_NODE_LOGIN_URI;
-
+const backend_node_logout_uri = process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -122,11 +122,11 @@ class App extends Component {
                     </Button>
                 <div
                     className='App' >
-                    <a href={process.env.REACT_APP_BACKEND_NODE_LOGIN_URI}>
+                    <a href={backend_node_login_uri}>
                         Login to Spotify </a>
                 </div>
                 <div className ='App' >
-                    <a href={process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI}>
+                    <a href={backend_node_logout_uri}>
                         Logout
                     </a>
                 </div>
