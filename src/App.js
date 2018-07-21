@@ -8,6 +8,7 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import 'typeface-roboto';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import jsonObject from './jsonTest';
 /*
 import secrets from './secretsconfigclient';
 */
@@ -30,7 +31,7 @@ const backend_node_logout_uri = process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI
 
 const spotifyApi = new SpotifyWebApi();
 var playlistJsonTemplate = {employees: [], attributes: [], pageSize: 2, links: {}};
-
+const jsonJsObject = this.jsonObject;
 
 class App extends Component {
     constructor(){
@@ -64,8 +65,9 @@ class App extends Component {
         }
         return hashParams;
     }
+
     /*Write a function called getNowPlaying inside of the App Class to make the API request. This function will use the one of the many spotify Api methods to make a request and creates a promise. We then use the response data to set state. The code below is already structured access the right data in the response, but I highly suggest you experiment by looking at the entire response object, either by logging it to the console or by checking the network tab in your dev tools*/
-    getNowPlaying(){
+    getNowPlaying() {
         spotifyApi.getMyCurrentPlaybackState()
             .then((response) => {
                 this.setState({
@@ -98,15 +100,19 @@ class App extends Component {
         alert(plJSON);
         return MyJSON;
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.storeUserNameAndId();
     }
 
-    doathing(){
-        spotifyApi.createPlaylist(this.state.currentuser.id, this.createJsonPlaylistParameter())
-    }
+/*    setJsonVar() {
+        console.log("setJsonVar() has been called.")
+        this.setState(jsonDisplay = jsonObject);
+        //this.state.jsonDisplay = jsonObject;
+    }*/
 
     render() {
+        const jsonDisplay = this.state.json;
         return (
             <Fragment>
                 <CssBaseline />
@@ -152,6 +158,17 @@ class App extends Component {
                     Check Now Playing
                     </Button>
                 }
+ {/*               <Button
+                    onClick={() =>
+
+                        this.state }>
+                    Click here to set the JSON
+                </Button>*/}
+                <div>
+                    <pre>
+                        {jsonDisplay}
+                    </pre>
+                </div>
             </Fragment>
     )
     }
