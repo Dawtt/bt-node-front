@@ -1,6 +1,6 @@
 import {
     SPOTIFY_TOKENS, SPOTIFY_ME_BEGIN, SPOTIFY_ME_SUCCESS, SPOTIFY_ME_FAILURE
-} from '../actions/actions';
+} from '../actions/spotify';
 
 /** The initial state; no tokens and no user info */
 const initialState = {
@@ -22,10 +22,8 @@ const initialState = {
     }
 };
 
-/**
- * Our reducer
- */
-export default function reduce(state = initialState, action) {
+// reducer
+const spotifyReducer= (state = initialState, action) => {
     switch (action.type) {
         // when we get the tokens... set the tokens!
         case SPOTIFY_TOKENS:
@@ -52,3 +50,5 @@ export default function reduce(state = initialState, action) {
             return state;
     }
 }
+
+export default spotifyReducer
