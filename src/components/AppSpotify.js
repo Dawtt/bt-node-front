@@ -9,6 +9,12 @@ import 'typeface-roboto';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import jsonObject from '../data/jsonTest';
+import Header2 from './Layouts/Header2';
+
+
+
+
+
 /*
 import secrets from './secretsconfigclient';
 */
@@ -115,6 +121,7 @@ class App extends Component {
         const jsonDisplay = this.state.json;
         return (
             <Fragment>
+                <Header2/>
                 <CssBaseline />
                 {/*<GoogleLogin onSuccess={} onFailure={} clientId={}/>*/}
                 <Header

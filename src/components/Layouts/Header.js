@@ -13,6 +13,19 @@ import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuButton from './menuButton';
+import { Link } from 'react-router-dom';
+import NavBar from '../NavBar';
+
+/*const NavBar = () => (
+    <div>
+        <div>
+            <Link to="/">Home</Link>
+            <Link to="/hello">Hello</Link>
+            <Link to="/counter">Counter</Link>
+
+        </div>
+    </div>
+)*/
 
 
 const styles = {
@@ -76,7 +89,15 @@ class Header extends React.Component {
                     <Toolbar>
                         {auth && <MenuButton
                             iconType={MenuIcon}
+
+
                             items={this.state.menumusicitems}
+
+
+/*
+                            items=
+                                {<Link to="/">Home</Link>}*/
+
                         />}
                         <Typography variant="title" color="inherit" className={classes.flex}>
                             <p>Basement Tunes</p>
