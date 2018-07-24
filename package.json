@@ -2,18 +2,6 @@
   "name": "bt-node-front",
   "version": "0.5.0",
   "private": true,
-  "dependencies": {
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4",
-    "@material-ui/core": "^1.1.0",
-    "@material-ui/icons": "^1.1.0",
-    "spotify-web-api-js": "^0.24.0",
-    "react-google-login": "^3.2.1",
-    "typeface-roboto": "^0.0.54",
-    "concurrently":"3.6.0",
-    "serve": "^9.2.0"
-  },
   "scripts": {
     "yarn": "yarn",
     "start": "react-scripts start",
@@ -25,13 +13,43 @@
     "build:dv": "cp .env.development .env && npm run build",
     "build:rc": "cp ./.env.production .env && npm run build"
   },
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "1.1.4",
+    "@material-ui/core": "^1.1.0",
+    "@material-ui/icons": "^1.1.0",
+    "spotify-web-api-js": "^0.24.0",
+    "react-google-login": "^3.2.1",
+    "typeface-roboto": "^0.0.54",
+    "concurrently":"3.6.0",
+    "serve": "^9.2.0",
+    "connected-react-router": "^4.0.0",
+    "history": "^4.4.1",
+    "prop-types": "^15.5.8",
+    "react-redux": "^4.4.8",
+    "react-router": "^4.1.0",
+    "react-router-dom": "^4.1.0",
+    "redux": "^3.6.0"
+  },
   "devDependencies": {
     "@storybook/react": "^3.4.8",
     "@storybook/addon-actions": "^3.4.8",
     "@storybook/addon-links": "^3.4.8",
     "@storybook/addons": "^3.4.8",
     "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "express": "^4.14.0",
+    "react-hot-loader": "^3.0.0-beta",
+    "webpack": "^2.2.0",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.15.0"
   },
   "engines": {
     "node": "8.9.3",
