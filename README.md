@@ -1,6 +1,22 @@
-Code based on walkthrough:
 
-https://github.com/jonnyk20/spotify-node-react-starter-kit
+# 'Basement Tunes' Front End UI
+
+This is a class group project based on numerous tutorials, and includes reused coding elements licensed for reuse.
+Credits:
+    Redux tutorials by Dan Abramov
+        https://github.com/gaearon/todos
+        https://egghead.io/courses/getting-started-with-redux
+    official 'connected-react-router' examples by supasate
+        https://github.com/supasate/connected-react-router/tree/master/examples/basic
+    spotify react router tutorial by Jon Kaufman
+        https://github.com/kauffecup/spotify-react-router-auth
+    spotify authentication offical examples
+        https://github.com/spotify/web-api-auth-examples
+    https://github.com/jonnyk20/spotify-node-react-starter-kit
+
+        
+
+
 
 ## Usage Notes
 - Client & server each have separate readme files with more build details.
