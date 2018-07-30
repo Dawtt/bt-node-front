@@ -157,7 +157,7 @@ class App extends Component {
                             this.getNowPlaying()}>
                         Check Now Playing
                     </Button>
-                
+
             </Fragment>
     )
     }
