@@ -130,7 +130,9 @@ class App extends Component {
                         Logout
                     </a>
                 </div>
+{/*
                 { this.state.loggedIn &&
+*/}
                 <Button onClick={() =>
                     this.getNowPlaying() &&
                     this.storeUserNameAndId()
@@ -144,12 +146,16 @@ class App extends Component {
                         <p>User ID: { this.state.currentuser.id}</p>
 
                     </Typography>
-                </Button>}
+                </Button>
+
+
+{/*
                 { this.state.loggedIn &&
+*/}
                     <Button
                         onClick={() =>
                             this.getNowPlaying()}>
-                    Check Now Playing
+                        Check Now Playing
                     </Button>
                 }
             </Fragment>
