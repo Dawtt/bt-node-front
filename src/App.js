@@ -10,16 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 
-import fire from './config/Fire'
+import fire from './config/Fire';
+import FirebaseLogin from './Components/FirebaseLogin';
+import FirebaseHome from './Components/FirebaseHome';
 
-/*
-import secrets from './secretsconfigclient';
-*/
-
-//import logo from './logo.svg';
-//import Papp from './Components/PApp.js';
-//import GoogleLogin from 'react-google-login';
-//import spotifyMethods from './spotifyMethods';
 
 
 /*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
@@ -46,6 +40,7 @@ class App extends Component {
             spotifyApi.setAccessToken(token);
         }
         this.state = {
+            firebaseUser:{},
             loggedIn: token ? true : false,
             nowPlaying: {name: '', albumArt: ''},
             currentuser: {id: '', name: '',},
@@ -104,10 +99,24 @@ class App extends Component {
     }
     componentDidMount(){
         this.storeUserNameAndId();
+        this.authListener();
     }
 
     doathing(){
         spotifyApi.createPlaylist(this.state.currentuser.id, this.createJsonPlaylistParameter())
+    }
+
+    authListener(){
+        fire.auth().onAuthStateChanged((firebaseUser) => {
+            //console.log(firebaseUser);
+            if(firebaseUser){
+                this.setState({firebaseUser});
+                localStorage.setItem('firebaseUser', firebaseUser.uid);
+            }else {
+                this.setState({firebaseUser: null});
+                //localStorage.removeItem('firebaseUser');
+            }
+        });
     }
 
     render() {
@@ -162,6 +171,9 @@ class App extends Component {
                         Check Now Playing
                     </Button>
 
+                <div className="App">
+                    {this.state.firebaseUser ? (<FirebaseHome />) : (<FirebaseLogin/>)}
+                </div>
             </Fragment>
     )
     }
