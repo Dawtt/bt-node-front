@@ -25,9 +25,7 @@
     "eject": "react-scripts eject",
     "build": "react-scripts build",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public",
-    "build:dv": "cp .env.development .env && npm run build",
-    "build:rc": "cp ./.env.production .env && npm run build"
+    "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
     "@storybook/react": "^3.4.8",
