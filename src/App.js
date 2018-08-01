@@ -8,12 +8,18 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import 'typeface-roboto';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+import artistsList from './Components/ArtistsListRedux'
 
 
 import fire from './config/Fire';
 import FirebaseLogin from './Components/FirebaseLogin';
 import FirebaseHome from './Components/FirebaseHome';
-
+import FirebaseDrawer from './Components/FirebaseDrawer';
 
 
 /*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
@@ -28,6 +34,12 @@ const backend_node_login_uri = process.env.REACT_APP_BACKEND_NODE_LOGIN_URI;
 
 const spotifyApi = new SpotifyWebApi();
 var playlistJsonTemplate = {employees: [], attributes: [], pageSize: 2, links: {}};
+
+
+
+
+
+const store = createStore(reducer, App)
 
 
 class App extends Component {
@@ -102,8 +114,8 @@ class App extends Component {
         this.authListener();
     }
 
-    doathing(){
-        spotifyApi.createPlaylist(this.state.currentuser.id, this.createJsonPlaylistParameter())
+    getTopArtists(){
+        spotifyApi.getMyTopTracks()
     }
 
     authListener(){
@@ -170,10 +182,8 @@ class App extends Component {
                             this.getNowPlaying()}>
                         Check Now Playing
                     </Button>
-
-                <div className="App">
-                    {this.state.firebaseUser ? (<FirebaseHome />) : (<FirebaseLogin/>)}
-                </div>
+   
+                <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
             </Fragment>
     )
     }
