@@ -8,14 +8,18 @@ import SpotifyWebApi from 'spotify-web-api-js';
 import 'typeface-roboto';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-/*
-import secrets from './secretsconfigclient';
-*/
+import Paper from '@material-ui/core/Paper';
 
-//import logo from './logo.svg';
-//import Papp from './Components/PApp.js';
-//import GoogleLogin from 'react-google-login';
-//import spotifyMethods from './spotifyMethods';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+import artistsList from './Components/ArtistsListRedux'
+
+
+import fire from './config/Fire';
+import FirebaseLogin from './Components/FirebaseLogin';
+import FirebaseHome from './Components/FirebaseHome';
+import FirebaseDrawer from './Components/FirebaseDrawer';
 
 
 /*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
@@ -32,6 +36,12 @@ const spotifyApi = new SpotifyWebApi();
 var playlistJsonTemplate = {employees: [], attributes: [], pageSize: 2, links: {}};
 
 
+
+
+
+const store = createStore(reducer, App)
+
+
 class App extends Component {
     constructor(){
         super();
@@ -42,6 +52,7 @@ class App extends Component {
             spotifyApi.setAccessToken(token);
         }
         this.state = {
+            firebaseUser:{},
             loggedIn: token ? true : false,
             nowPlaying: {name: '', albumArt: ''},
             currentuser: {id: '', name: '',},
@@ -100,10 +111,24 @@ class App extends Component {
     }
     componentDidMount(){
         this.storeUserNameAndId();
+        this.authListener();
     }
 
-    doathing(){
-        spotifyApi.createPlaylist(this.state.currentuser.id, this.createJsonPlaylistParameter())
+    getTopArtists(){
+        spotifyApi.getMyTopTracks()
+    }
+
+    authListener(){
+        fire.auth().onAuthStateChanged((firebaseUser) => {
+            //console.log(firebaseUser);
+            if(firebaseUser){
+                this.setState({firebaseUser});
+                localStorage.setItem('firebaseUser', firebaseUser.uid);
+            }else {
+                this.setState({firebaseUser: null});
+                //localStorage.removeItem('firebaseUser');
+            }
+        });
     }
 
     render() {
@@ -130,7 +155,9 @@ class App extends Component {
                         Logout
                     </a>
                 </div>
+{/*
                 { this.state.loggedIn &&
+*/}
                 <Button onClick={() =>
                     this.getNowPlaying() &&
                     this.storeUserNameAndId()
@@ -144,14 +171,19 @@ class App extends Component {
                         <p>User ID: { this.state.currentuser.id}</p>
 
                     </Typography>
-                </Button>}
+                </Button>
+
+
+{/*
                 { this.state.loggedIn &&
+*/}
                     <Button
                         onClick={() =>
                             this.getNowPlaying()}>
-                    Check Now Playing
+                        Check Now Playing
                     </Button>
-                }
+   
+                <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
             </Fragment>
     )
     }
