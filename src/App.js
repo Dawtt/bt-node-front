@@ -148,7 +148,7 @@ class App extends Component {
 
                 <div>
                     {this.state.loggedIn ?
-                        (<Button target="_blank" href={spotifyLogoutUrl}>Logout from
+                        (<Button target="_blank" href='http://www.btnf.basementtrolls.com'>Logout from
                             Spotify</Button>)
                         : (<Button target="_blank" href={spotifyLoginUrl}>Login with
                             Spotify</Button>)
