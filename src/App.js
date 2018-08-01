@@ -145,19 +145,17 @@ class App extends Component {
                         this.storeUserNameAndId()
                         }>
                     </Button>
-                <div
-                    className='App' >
-                    <a href={process.env.REACT_APP_BACKEND_NODE_LOGIN_URI}>
-                        Login to Spotify </a>
+
+
+                <div>
+                    {this.state.loggedIn ?
+                        (<Button target="_blank" href={process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI}>Logout from
+                            Spotify</Button>)
+                        : (<Button target="_blank" href={process.env.REACT_APP_BACKEND_NODE_LOGIN_URI}>Login with
+                            Spotify</Button>)
+                    }
                 </div>
-                <div className ='App' >
-                    <a href={process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI}>
-                        Logout
-                    </a>
-                </div>
-{/*
-                { this.state.loggedIn &&
-*/}
+
                 <Button onClick={() =>
                     this.getNowPlaying() &&
                     this.storeUserNameAndId()
@@ -182,7 +180,7 @@ class App extends Component {
                             this.getNowPlaying()}>
                         Check Now Playing
                     </Button>
-   
+
                 <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
             </Fragment>
     )
