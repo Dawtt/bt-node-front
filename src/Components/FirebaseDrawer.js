@@ -67,7 +67,7 @@ class SwipeableTemporaryDrawer extends React.Component {
 
         return (
             <div>
-                <Button onClick={this.toggleDrawer('bottom', true)}>Firebase Login</Button>
+                <Button onClick={this.toggleDrawer('bottom', true)}>Login to Basement Tunes!</Button>
 
                 <SwipeableDrawer
                     anchor="bottom"
