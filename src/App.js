@@ -28,9 +28,8 @@ if (process.env.NODE_ENV !== 'production') {
     console.log("dotenv is being required.")
 }*/
 
-const backend_node_login_uri = process.env.REACT_APP_BACKEND_NODE_LOGIN_URI;
-
-
+const spotifyLoginUrl = process.env.REACT_APP_BACKEND_NODE_LOGIN_URI;
+const spotifyLogoutUrl = process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI;
 
 const spotifyApi = new SpotifyWebApi();
 var playlistJsonTemplate = {employees: [], attributes: [], pageSize: 2, links: {}};
@@ -149,9 +148,9 @@ class App extends Component {
 
                 <div>
                     {this.state.loggedIn ?
-                        (<Button target="_blank" href={process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI}>Logout from
+                        (<Button target="_blank" href={spotifyLogoutUrl}>Logout from
                             Spotify</Button>)
-                        : (<Button target="_blank" href={process.env.REACT_APP_BACKEND_NODE_LOGIN_URI}>Login with
+                        : (<Button target="_blank" href={spotifyLoginUrl}>Login with
                             Spotify</Button>)
                     }
                 </div>
