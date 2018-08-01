@@ -57,12 +57,6 @@ class SwipeableTemporaryDrawer extends React.Component {
     render() {
         const { classes } = this.props;
 
-        const sideList = (
-            <div>
-
-            </div>
-        );
-
         const fullList = (
             <div className={classes.fullList}>
                 <List>{mailFolderListItems}</List>
