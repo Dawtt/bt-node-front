@@ -30,10 +30,49 @@ if (process.env.NODE_ENV !== 'production') {
 
 const spotifyLoginUrl = process.env.REACT_APP_BACKEND_NODE_LOGIN_URI;
 const spotifyLogoutUrl = process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI;
+const piServerAddress = 'http://127.0.0.1:5000/';
 
 const spotifyApi = new SpotifyWebApi();
 var playlistJsonTemplate = {employees: [], attributes: [], pageSize: 2, links: {}};
 
+
+
+class Form1 extends Component{
+    render(){
+        return (
+            <div class="form">
+                <form action="http://localhost:5000/result" method="get">
+                    Enter Track ID: <input type="songid" name="place"/>
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
+        );
+    }
+}
+
+
+class FormSearchBar extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            songsearchbar: {}
+        }
+    }
+
+
+        render() {
+            return (
+                <div class="form">
+                    <form action="http://localhost:5000/result" method="get">
+                        Place: <input type="text" name="place"/>
+                        <input type="submit" value="Submit"/>
+                    </form>
+                </div>
+            );
+        }
+
+}
 
 
 
@@ -56,7 +95,8 @@ class App extends Component {
             nowPlaying: {name: '', albumArt: ''},
             currentuser: {id: '', name: '',},
             //additions
-            cities: {cities: []}
+            cities: {cities: []},
+            songsearchbar: {}
         }
 
 
@@ -130,9 +170,12 @@ class App extends Component {
         });
     }
 
+
     render() {
         return (
             <Fragment>
+                <Form1/>
+                <FormSearchBar/>
                 <CssBaseline />
                 {/*<GoogleLogin onSuccess={} onFailure={} clientId={}/>*/}
                 <Header
