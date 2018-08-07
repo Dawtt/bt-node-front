@@ -13,13 +13,19 @@ import Paper from '@material-ui/core/Paper';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
-import artistsList from './Components/ArtistsListRedux'
+import  {ArtistsListRedux} from './Components/ArtistsListRedux'
 
 
 import fire from './config/Fire';
 import FirebaseLogin from './Components/FirebaseLogin';
 import FirebaseHome from './Components/FirebaseHome';
 import FirebaseDrawer from './Components/FirebaseDrawer';
+
+
+import PropTypes from 'prop-types';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 
 /*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
@@ -41,7 +47,7 @@ class Form1 extends Component{
     render(){
         return (
             <div class="form">
-                <form action="http://localhost:5000/result" method="get">
+                <form action={piServerAddress} method="get">
                     Enter Track ID: <input type="songid" name="place"/>
                     <input type="submit" value="Submit"/>
                 </form>
@@ -65,7 +71,7 @@ class FormSearchBar extends Component {
             return (
                 <div class="form">
                     <form action="http://localhost:5000/result" method="get">
-                        Place: <input type="text" name="place"/>
+                        Enter Song Name: <input type="text" name="place"/>
                         <input type="submit" value="Submit"/>
                     </form>
                 </div>
@@ -74,6 +80,46 @@ class FormSearchBar extends Component {
 
 }
 
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 300,
+    },
+    listSection: {
+        backgroundColor: 'inherit',
+    },
+    ul: {
+        backgroundColor: 'inherit',
+        padding: 0,
+    },
+});
+
+function PinnedSubheaderList(props) {
+    const { classes } = props;
+
+    return (
+        <List className={classes.root} subheader={<li />}>
+            {[0, 1, 2, 3, 4].map(sectionId => (
+                <li key={`section-${sectionId}`} className={classes.listSection}>
+                    {[0, 1, 2].map(item => (
+                        <ListItem key={`item-${sectionId}-${item}`}>
+                            <ListItemText primary={`Item ${item}`} />
+                        </ListItem>
+                    ))}
+                </li>
+            ))}
+        </List>
+    );
+}
+
+PinnedSubheaderList.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 
 
@@ -174,8 +220,7 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <Form1/>
-                <FormSearchBar/>
+
                 <CssBaseline />
                 {/*<GoogleLogin onSuccess={} onFailure={} clientId={}/>*/}
                 <Header
@@ -212,17 +257,14 @@ class App extends Component {
 
                     </Typography>
                 </Button>
-
-
-{/*
-                { this.state.loggedIn &&
-*/}
                     <Button
                         onClick={() =>
                             this.getNowPlaying()}>
                         Check Now Playing
                     </Button>
-
+                <Form1/>
+                <FormSearchBar/>
+                <PinnedSubheaderList classes={"hey", "you", 1, 3}/>
                 <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
             </Fragment>
     )
