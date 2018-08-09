@@ -26,7 +26,7 @@ import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import ListMappedExample from './Components/ListMappedExample';
 
 /*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
 if (process.env.NODE_ENV !== 'production') {
@@ -36,7 +36,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const spotifyLoginUrl = process.env.REACT_APP_BACKEND_NODE_LOGIN_URI;
 const spotifyLogoutUrl = process.env.REACT_APP_BACKEND_NODE_LOGOUT_URI;
-const piServerAddress = 'http://127.0.0.1:5000/';
+const piServerAddress = 'http://127.0.0.1:5000';
 
 const spotifyApi = new SpotifyWebApi();
 var playlistJsonTemplate = {employees: [], attributes: [], pageSize: 2, links: {}};
@@ -47,7 +47,7 @@ class Form1 extends Component{
     render(){
         return (
             <div class="form">
-                <form action={piServerAddress} method="get">
+                <form action={piServerAddress+/getartistlist/} method="get">
                     Enter Track ID: <input type="songid" name="place"/>
                     <input type="submit" value="Submit"/>
                 </form>
@@ -62,7 +62,7 @@ class FormSearchBar extends Component {
     constructor() {
         super();
         this.state = {
-            songsearchbar: {}
+            songsearchbar: {"song1": "thing", "song2": "thing2", "songsearchbaritems": "thing3"}
         }
     }
 
@@ -71,6 +71,12 @@ class FormSearchBar extends Component {
             return (
                 <div class="form">
                     <form action="http://localhost:5000/result" method="get">
+                        <select name="cars">
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="fiat">Fiat</option>
+                            <option value="audi">Audi</option>
+                        </select>
                         Enter Song Name: <input type="text" name="place"/>
                         <input type="submit" value="Submit"/>
                     </form>
@@ -262,10 +268,11 @@ class App extends Component {
                             this.getNowPlaying()}>
                         Check Now Playing
                     </Button>
-                <Form1/>
-                <FormSearchBar/>
+                <ListMappedExample/>
                 <PinnedSubheaderList classes={"hey", "you", 1, 3}/>
                 <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
+                <Form1/>
+                <FormSearchBar/>
             </Fragment>
     )
     }
