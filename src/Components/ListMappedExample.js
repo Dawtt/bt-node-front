@@ -17,7 +17,8 @@ class ListMappedExample extends React.Component {
         super()
         this.state = {
             comments: [],
-            items: {}
+            artistlist: {}
+
         }
     }
 
@@ -32,9 +33,14 @@ class ListMappedExample extends React.Component {
 
             .then(
                  (result) => {
+                     // console.log(result)
+                     console.log("here is test data")
+                     console.log(typeof result)
+                     console.log(result[3])
+                     console.log(result[3].artist)
                     this.setState({
                         isLoaded: true,
-                        items: result.items
+                        artistlist: result
                     });
                 },
                 // Note: it's important to handle errors here
@@ -50,22 +56,26 @@ class ListMappedExample extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, artistlist } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <div>Loading...</div>;
-        } else {
+        } else if (artistlist){
             return (
-                <ul>
-                    {items.map(item => (
-                        <li key={item.name}>
-                            {item.name} {item.price}
-                        </li>
-                    ))}
-                </ul>
+                    <ul>
+                        {artistlist.map((artistlist, index) => (
+                            <li key={index} value = {artistlist.artist}>
+                                {artistlist.artist}
+
+                            </li>
+                        ))}
+                    </ul>
             );
-        }
+        } else
+            return (
+                <p> failed if</p>
+            )
     }
 }
 

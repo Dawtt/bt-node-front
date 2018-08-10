@@ -27,6 +27,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListMappedExample from './Components/ListMappedExample';
+import AutosearchArtist from './Components/AutosearchArtist';
 
 /*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
 if (process.env.NODE_ENV !== 'production') {
@@ -268,8 +269,11 @@ class App extends Component {
                             this.getNowPlaying()}>
                         Check Now Playing
                     </Button>
+{/*
+                <AutosearchArtist/>
+*/}
                 <ListMappedExample/>
-                <PinnedSubheaderList classes={"hey", "you", 1, 3}/>
+
                 <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
                 <Form1/>
                 <FormSearchBar/>
