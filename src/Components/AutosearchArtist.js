@@ -51,7 +51,7 @@ const suggestions = [
 }));
 
 
-const artistlisttest = [
+var artistlisttest = [
     { label: 'Botswana' },
     { label: 'Bouvet Island' },
     { label: 'Brazil' },
@@ -60,8 +60,6 @@ const artistlisttest = [
     happydoda: suggestion.label,
     label: suggestion.label,
 }));
-
-
 
 
 
@@ -233,12 +231,17 @@ class IntegrationReactSelect extends React.Component {
                     console.log(typeof suggestions)
                     console.log(result[3])
                     console.log(result[3].artist)
+                    console.log('artistlisttest before map')
+                    console.log(artistlisttest)
+                    console.log('artistlisttest after map')
+                    artistlisttest = result.map(suggestion => ({
+                        value: suggestion.artist,
+                        label: suggestion.artist,
+                    }));
+                    console.log(artistlisttest)
                     this.setState({
                         isLoaded: true,
-                        artistlist: result.map(label => ({
-                            value: label.label,
-                            label: label.label,
-                        }))
+                        artistlist: artistlisttest,
                     });
                 },
 
