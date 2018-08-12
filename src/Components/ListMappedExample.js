@@ -74,7 +74,7 @@ class ListMappedExample extends React.Component {
             );
         } else
             return (
-                <p> failed if</p>
+                <p>The list of artists did not Load, please contact customer support.</p>
             )
     }
 }

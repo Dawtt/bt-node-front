@@ -269,12 +269,16 @@ class App extends Component {
                             this.getNowPlaying()}>
                         Check Now Playing
                     </Button>
-{/*
-                <AutosearchArtist/>
-*/}
-                <ListMappedExample/>
-
                 <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
+
+                <AutosearchArtist/>
+
+
+{/*
+                <ListMappedExample/>
+*/}
+
+
                 <Form1/>
                 <FormSearchBar/>
             </Fragment>

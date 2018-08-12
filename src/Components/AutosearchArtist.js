@@ -10,8 +10,45 @@ import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
 
-
-var suggestions = []
+const suggestions = [
+    { label: 'Afghanistan' },
+    { label: 'Aland Islands' },
+    { label: 'Albania' },
+    { label: 'Algeria' },
+    { label: 'American Samoa' },
+    { label: 'Andorra' },
+    { label: 'Angola' },
+    { label: 'Anguilla' },
+    { label: 'Antarctica' },
+    { label: 'Antigua and Barbuda' },
+    { label: 'Argentina' },
+    { label: 'Armenia' },
+    { label: 'Aruba' },
+    { label: 'Australia' },
+    { label: 'Austria' },
+    { label: 'Azerbaijan' },
+    { label: 'Bahamas' },
+    { label: 'Bahrain' },
+    { label: 'Bangladesh' },
+    { label: 'Barbados' },
+    { label: 'Belarus' },
+    { label: 'Belgium' },
+    { label: 'Belize' },
+    { label: 'Benin' },
+    { label: 'Bermuda' },
+    { label: 'Bhutan' },
+    { label: 'Bolivia, Plurinational State of' },
+    { label: 'Bonaire, Sint Eustatius and Saba' },
+    { label: 'Bosnia and Herzegovina' },
+    { label: 'Botswana' },
+    { label: 'Bouvet Island' },
+    { label: 'Brazil' },
+    { label: 'British Indian Ocean Territory' },
+    { label: 'Brunei Darussalam' },
+].map(suggestion => ({
+    value: suggestion.label,
+    label: suggestion.label,
+}));
 
 const styles = theme => ({
     root: {
@@ -49,12 +86,6 @@ const styles = theme => ({
         fontSize: 16,
     },
 });
-
-
-
-
-
-
 
 function NoOptionsMessage(props) {
     return (
@@ -145,6 +176,8 @@ function MultiValue(props) {
     );
 }
 
+
+
 const components = {
     Option,
     Control,
@@ -155,54 +188,60 @@ const components = {
     ValueContainer,
 };
 
-class AutosearchArtist extends React.Component {
+class IntegrationReactSelect extends React.Component {
     state = {
         single: null,
         multi: null,
-        comments: [],
-        artistlist: {}
     };
+
+    componentDidMount() {
+        /*    fetch("http://127.0.0.1:5000/getartistlist/")
+                .then(console.log("past the fetch"))
+                .then(res => res.json())
+                /!*            .then((result) => {
+                                console.log(result)
+                            })*!/
+
+
+                .then(
+                    (result) => {
+                        // console.log(result)
+                        console.log("here is test data")
+                        console.log(typeof result)
+                        console.log(result[3])
+                        console.log(result[3].artist)
+                        this.setState({
+                            isLoaded: true,
+                            artistlist: result
+                        });
+                    },
+
+                    // Note: it's important to handle errors here
+                    // instead of a catch() block so that we don't swallow
+                    // exceptions from actual bugs in components.
+                    (error) => {
+                        this.setState({
+                            isLoaded: true,
+                            error
+                        });
+                    }
+                )*/
+
+        this.setState({
+            isLoaded: true,
+            artistlist: {"artist":"Vega Feat. Arnold Jarvis"},
+
+        });
+
+
+    }
+
 
     handleChange = name => value => {
         this.setState({
             [name]: value,
         });
     };
-
-    componentDidMount() {
-        fetch("http://127.0.0.1:5000/getartistlist/")
-            .then(console.log("past the fetch"))
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    // console.log(result)
-                    console.log("here is test data")
-                    console.log(typeof result)
-                    console.log(result[3])
-                    console.log(result[3].artist)
-                    this.setState({
-                        isLoaded: true,
-                        artistlist: result
-                    });
-                },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
-            .then(
-                this.setState(
-                    suggestions = this.state.artistlist
-                )
-            )
-    }
-
-
 
     render() {
         const { classes } = this.props;
@@ -218,23 +257,15 @@ class AutosearchArtist extends React.Component {
                         onChange={this.handleChange('single')}
                         placeholder="Search a country (start with a)"
                     />
-                    <Select
-                        classes={classes}
-                        options={this.state.artistlist}
-                        components={components}
-                        value={this.state.multi}
-                        onChange={this.handleChange('multi')}
-                        placeholder="Select multiple countries"
-                        isMulti
-                    />
+
                 </NoSsr>
             </div>
         );
     }
 }
 
-AutosearchArtist.propTypes = {
+IntegrationReactSelect.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(AutosearchArtist);
+export default withStyles(styles)(IntegrationReactSelect);
