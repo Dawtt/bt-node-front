@@ -51,59 +51,20 @@ const suggestions = [
 }));
 
 
-const artistlist = [
+const artistlisttest = [
     { label: 'Botswana' },
     { label: 'Bouvet Island' },
     { label: 'Brazil' },
 ].map(suggestion => ({
-    value: suggestion.label,
+    heyday: suggestion.label,
+    happydoda: suggestion.label,
     label: suggestion.label,
 }));
 
 
 
 
-function componentDidMount() {
-    /*    fetch("http://127.0.0.1:5000/getartistlist/")
-            .then(console.log("past the fetch"))
-            .then(res => res.json())
-            /!*            .then((result) => {
-                            console.log(result)
-                        })*!/
 
-
-            .then(
-                (result) => {
-                    // console.log(result)
-                    console.log("here is test data")
-                    console.log(typeof result)
-                    console.log(result[3])
-                    console.log(result[3].artist)
-                    this.setState({
-                        isLoaded: true,
-                        artistlist: result
-                    });
-                },
-
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )*/
-
-    this.setState({
-        isLoaded: true,
-        artistlist: {"artist":"Vega Feat. Arnold Jarvis"},
-
-    });
-
-
-}
 
 
 
@@ -253,6 +214,45 @@ class IntegrationReactSelect extends React.Component {
         artistlist: {},
     };
 
+    componentDidMount() {
+        console.log("componenentdidMount() called, about to fetch");
+        fetch("http://127.0.0.1:5000/getartistlist/")
+            .then(console.log("past the fetch"))
+            .then(res => res.json())
+  /*          .then((result) => {
+                console.log(result)
+            })*/
+
+
+            .then(
+                (result) => {
+                    // console.log(result)
+                    console.log("here is test data")
+                    console.log(typeof result)
+                    console.log("type for suggestions: ")
+                    console.log(typeof suggestions)
+                    console.log(result[3])
+                    console.log(result[3].artist)
+                    this.setState({
+                        isLoaded: true,
+                        artistlist: result.map(label => ({
+                            value: label.label,
+                            label: label.label,
+                        }))
+                    });
+                },
+
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
 
     handleChange = name => value => {
         this.setState({
@@ -265,10 +265,12 @@ class IntegrationReactSelect extends React.Component {
 
         return (
             <div className={classes.root}>
+                <p> {console.log(this.state.artistlist)}</p>
+                <p> {console.log(artistlisttest)} </p>
                 <NoSsr>
                     <Select
                         classes={classes}
-                        options={artistlist}
+                        options={artistlisttest}
                         components={components}
                         value={this.state.single}
                         onChange={this.handleChange('single')}

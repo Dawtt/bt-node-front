@@ -271,12 +271,17 @@ class App extends Component {
                     </Button>
                 <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
 
+
+
                 <AutosearchArtist/>
+
+
 
 
 {/*
                 <ListMappedExample/>
 */}
+
 
 
                 <Form1/>
