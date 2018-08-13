@@ -258,6 +258,7 @@ class IntegrationReactSelect extends React.Component {
     }
 
     handleChange = name => value => {
+        console.log("handleChange has been called")
         this.setState({
             [name]: value,
         });
@@ -272,7 +273,9 @@ class IntegrationReactSelect extends React.Component {
                 <p> {console.log(artistlisttest)} </p>
                 <NoSsr>
                     <Select
+
                         classes={classes}
+
                         options={artistlisttest}
                         components={components}
                         value={this.state.single}

@@ -28,6 +28,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListMappedExample from './Components/ListMappedExample';
 import AutosearchArtist from './Components/AutosearchArtist';
+import SimpleAutosearch from './Components/SimpleAutosearch';
 
 /*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
 if (process.env.NODE_ENV !== 'production') {
@@ -129,8 +130,6 @@ PinnedSubheaderList.propTypes = {
 };
 
 
-
-const store = createStore(reducer, App)
 
 
 class App extends Component {
@@ -271,9 +270,9 @@ class App extends Component {
                     </Button>
                 <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
 
+                <SimpleAutosearch/>
 
-
-                <AutosearchArtist/>
+                <AutosearchArtist />
 
 
 
