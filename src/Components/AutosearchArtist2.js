@@ -211,13 +211,17 @@ const components = {
     ValueContainer,
 };
 
-class IntegrationReactSelect extends React.Component {
-        state = {
+class AutosearchArtist2 extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
             single: null,
             multi: null,
             artistlist: {},
-            selectedOption: null
+            selectedOption: null,
+            isLoaded: false
         };
+}
 
 
 
@@ -231,13 +235,19 @@ class IntegrationReactSelect extends React.Component {
                     artistlisttest = result.map(suggestion => ({
                         value: suggestion.artist,
                         label: suggestion.artist,
-                    }));
-
-                })
+                    }))
+                    console.log("after mapping artistlisttest")
+                    console.log(artistlisttest)
+                }
+            )
+            .then(this.setArtistListState)
     }
 
     setArtistListState() {
         console.log("before this.setState")
+        console.log("isLoaded & artistlist")
+        console.log(this.state.isLoaded)
+        console.log(this.state.artistlist)
 
         this.setState({
             isLoaded: true,
@@ -252,17 +262,19 @@ class IntegrationReactSelect extends React.Component {
         console.log("componentDidMount running, aristlist = ")
         console.log(this.artistlist)
 
-/*        if (!this.artistlist) {
-            this.fetchTheArtistList();
-            this.setArtistListState();
-            console.log("component did mount comint to an end")
+/*                if (!this.artistlist) {
+                    this.fetchTheArtistList();
+                    this.setArtistListState();
+                    console.log("component did mount comint to an end")
+                }*/
+
+        this.fetchTheArtistList()
+                console.log("final line of componentDidMount()")
+
         }
-        console.log("final line of componentDidMount()")
-        */
-    }
 
     handleChange = name => value => {
-        console.log("handleChange has been called")
+                console.log("handleChange has been called")
         this.setState({
             [name]: value,
         });
@@ -294,8 +306,8 @@ class IntegrationReactSelect extends React.Component {
     }
 }
 
-IntegrationReactSelect.propTypes = {
+AutosearchArtist2.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(IntegrationReactSelect);
+export default withStyles(styles)(AutosearchArtist2);

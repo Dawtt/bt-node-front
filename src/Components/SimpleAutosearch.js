@@ -1,25 +1,24 @@
 import React from 'react';
 import Select from 'react-select';
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-];
 
-var artistlisttest = [
-    { label: 'Botswana' },
-    { label: 'Bouvet Island' },
-    { label: 'Brazil' },
-].map(suggestion => ({
-    heyday: suggestion.label,
-    happydoda: suggestion.label,
-    label: suggestion.label,
-}));
+
+
 
 class SimpleAutosearch extends React.Component {
     state = {
         selectedOption: null,
+        artistlisttest: [
+            { label: 'Botswana' },
+            { label: 'Bouvet Island' },
+            { label: 'Brazil' },
+        ].map(suggestion => ({
+            heyday: suggestion.label,
+            happydoda: suggestion.label,
+            label: suggestion.label,
+        })),
+        artistlistinput: {},
+        isLoaded: false,
     }
 
     componentDidMount() {
@@ -35,24 +34,21 @@ class SimpleAutosearch extends React.Component {
             .then(
                 (result) => {
                     // console.log(result)
-                    console.log("here is test data")
-                    console.log(typeof result)
-                    console.log("type for suggestions: ")
-                    console.log(typeof suggestions)
-                    console.log(result[3])
-                    console.log(result[3].artist)
-                    console.log('artistlisttest before map')
-                    console.log(artistlisttest)
-                    console.log('artistlisttest after map')
-                    artistlisttest = result.map(suggestion => ({
+
+                    this.state.artistlisttest = result.map(suggestion => ({
                         value: suggestion.artist,
                         label: suggestion.artist,
                     }));
-                    console.log(artistlisttest)
-                    this.setState({
+                    this.setState(
+                        {isLoaded: true}
+                    );
+                    console.log("after mapping in componentdidmoutn")
+                    console.log(this.state.artistlistinput)
+
+/*                    this.setState({
                         isLoaded: true,
                         artistlist: artistlisttest,
-                    });
+                    });*/
                 },
 
                 // Note: it's important to handle errors here
@@ -65,6 +61,17 @@ class SimpleAutosearch extends React.Component {
                     });
                 }
             )
+/*            .then(
+                this.updateArtistList()
+            )*/
+    }
+
+    updateArtistList() {
+        this.setState({
+            artistlisttest: this.artistlistinput
+        })
+        console.log("updateArtistList() called")
+        console.log(this.state.artistlisttest)
     }
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
@@ -73,14 +80,25 @@ class SimpleAutosearch extends React.Component {
     render() {
         const { selectedOption } = this.state;
 
-        return (
-            <Select
-                value={selectedOption}
-                onChange={this.handleChange}
-                options={artistlisttest}
-            />
-        );
+
+
+            return (
+                <Select
+                    value={selectedOption}
+                    onChange={this.handleChange}
+                    options={this.state.artistlisttest}
+                />
+            )
     }
 }
+
+
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+];
+
+
 
 export default SimpleAutosearch

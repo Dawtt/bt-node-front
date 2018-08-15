@@ -1,4 +1,5 @@
 /*some function descriptions from https://medium.com/@jonnykalambay/now-playing-using-spotifys-awesome-api-with-react-7db8173a7b13*/
+'use strict';
 
 import React, { Component, Fragment, LinkHTMLAttributes } from 'react';
 import './App.css';
@@ -29,6 +30,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListMappedExample from './Components/ListMappedExample';
 import AutosearchArtist from './Components/AutosearchArtist';
 import SimpleAutosearch from './Components/SimpleAutosearch';
+import AutosearchArtist2 from "./Components/AutosearchArtist2";
 
 /*// react-scripts accomplishes .env protocol, this is not needed with it. This needs to be above any variable assignments using .env environment variables. 'dotenv' is imported in package.json, and used for .env configuration in development.
 if (process.env.NODE_ENV !== 'production') {
@@ -48,7 +50,7 @@ var playlistJsonTemplate = {employees: [], attributes: [], pageSize: 2, links: {
 class Form1 extends Component{
     render(){
         return (
-            <div class="form">
+            <div className="form">
                 <form action={piServerAddress+/getartistlist/} method="get">
                     Enter Track ID: <input type="songid" name="place"/>
                     <input type="submit" value="Submit"/>
@@ -107,29 +109,17 @@ const styles = theme => ({
     },
 });
 
-function PinnedSubheaderList(props) {
-    const { classes } = props;
-
-    return (
-        <List className={classes.root} subheader={<li />}>
-            {[0, 1, 2, 3, 4].map(sectionId => (
-                <li key={`section-${sectionId}`} className={classes.listSection}>
-                    {[0, 1, 2].map(item => (
-                        <ListItem key={`item-${sectionId}-${item}`}>
-                            <ListItemText primary={`Item ${item}`} />
-                        </ListItem>
-                    ))}
-                </li>
-            ))}
-        </List>
-    );
-}
-
-PinnedSubheaderList.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 
+var artistlisttestfromapp = [
+    { label: 'Botswana' },
+    { label: 'Bouvet Island' },
+    { label: 'Brazil' },
+].map(suggestion => ({
+    heyday: suggestion.label,
+    happydoda: suggestion.label,
+    label: suggestion.label,
+}));
 
 
 class App extends Component {
@@ -148,10 +138,10 @@ class App extends Component {
             currentuser: {id: '', name: '',},
             //additions
             cities: {cities: []},
-            songsearchbar: {}
+            songsearchbar: {},
+            songslist: {},
+            artistlist: {artist: "fakeartist"}
         }
-
-
     }
 
     /*Now we just need to pull the token from the query sting into our react app and we can use it. There are many ways to do this, but I’m lazy so I copied the function getHashParams from the example code that we cloned (found in auth-server/authorization_code/public/index.html), and made a slight change just to silence create-react-app’s picky linter. The function returns an object with the parameters as properties.*/
@@ -221,7 +211,47 @@ class App extends Component {
             }
         });
     }
+    fetchTheArtistList() {
+        console.log("fetchTheArtistList() called, about to fetch");
+        fetch("http://127.0.0.1:5000/getartistlist/")
+            .then(console.log("past the fetch"))
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.state.artistlisttest = result.map(suggestion => ({
+                        value: suggestion.artist,
+                        label: suggestion.artist,
+                    }));
 
+                })
+    }
+
+    setArtistListState() {
+        console.log("before this.setState")
+
+        this.setState({
+            isLoaded: true,
+            artistlist: this.state.artistlisttest,
+
+        });
+        console.log("after this.setSTate")
+    }
+
+
+    pullSongsFromArtist(){
+        let artistsongsURL = 'http://127.0.0.1:5000/getartistfromid/'
+        let artistinquestion = document.getElementById("AutosearchArtist").valueOf()
+
+        fetch( artistsongsURL + artistinquestion)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.state.songslist = result.map(suggestion => ({
+                        value: suggestion.song,
+                        label: suggestion.song,
+                    }));
+                })
+    }
 
     render() {
         return (
@@ -237,6 +267,7 @@ class App extends Component {
                         this.getNowPlaying() &&
                         this.storeUserNameAndId()
                         }>
+                        get now playing
                     </Button>
 
 
@@ -257,10 +288,10 @@ class App extends Component {
                         <div>
                             <img src={this.state.nowPlaying.albumArt} style={{ height: 150 }}/>
                         </div>
-                        <p>Now Playing: { this.state.nowPlaying.name }</p>
-                        <p>Current User: { this.state.currentuser.name}</p>
-                        <p>User ID: { this.state.currentuser.id}</p>
-
+                        <div>Now Playing: { this.state.nowPlaying.name }</div>
+                        <div>Current User: { this.state.currentuser.name}</div>
+                        <div>User ID: { this.state.currentuser.id}</div>
+                        Get Now Playing
                     </Typography>
                 </Button>
                     <Button
@@ -270,9 +301,17 @@ class App extends Component {
                     </Button>
                 <FirebaseDrawer firebaseUser={this.state.firebaseUser}/>
 
+{/*
                 <SimpleAutosearch/>
+*/}
 
-                <AutosearchArtist />
+{/*
+                <AutosearchArtist artistlisttestfromapp/>
+*/}
+
+                <SimpleAutosearch/>
+                <Button onClick={this.pullSongsFromArtist}> Get Songs From Artist </Button>
+
 
 
 
@@ -283,7 +322,9 @@ class App extends Component {
 
 
 
+{/*
                 <Form1/>
+*/}
                 <FormSearchBar/>
             </Fragment>
     )
